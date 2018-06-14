@@ -13,11 +13,6 @@ public class RegisterDTO {
 	private String address2;
 	private String isBlocked;
 	
-	
-	public RegisterDTO() {
-		
-	}
-
 	public RegisterDTO() {
 	}
 

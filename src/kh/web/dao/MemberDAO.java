@@ -23,7 +23,6 @@ public class MemberDAO {
 		pstat.close();
 		con.close();
 
-
 		return result;
 	}
 
@@ -32,7 +31,7 @@ public class MemberDAO {
 		Connection con = DBUtils.getConnection();
 		String sql = "insert into members values(?,?,?,?,?,?,?,?,?,?,'n')";
 		PreparedStatement pstat = con.prepareStatement(sql);
-		
+
 		pstat.setString(1, dto.getId());
 		pstat.setString(2, dto.getPw());
 		pstat.setString(3, dto.getName());
@@ -46,7 +45,7 @@ public class MemberDAO {
 
 		int resultInt = pstat.executeUpdate();
 		boolean result = false;
-		
+
 		if (resultInt > 0) {
 			result = true;
 		} else {
@@ -114,9 +113,7 @@ public class MemberDAO {
 		return result;
 	}
 
-	
-	
-	public int memberOutData(String id , String pw) throws Exception{
+	public int memberOutData(String id, String pw) throws Exception {
 		Connection con = DBUtils.getConnection();
 		String sql = "delete from members where id=? and pw=?";
 		PreparedStatement pstat = con.prepareStatement(sql);
@@ -128,6 +125,34 @@ public class MemberDAO {
 		con.close();
 		return result;
 	}
-	
-	
+
+	public RegisterDTO myPage(String id) throws Exception{
+		Connection con = DBUtils.getConnection();
+
+		String sql = "select * from members where id=?";
+		PreparedStatement pstat = con.prepareStatement(sql);
+		pstat.setString(1, id);
+		ResultSet rs = pstat.executeQuery();
+		RegisterDTO rdto = new RegisterDTO();
+
+		while (rs.next()) {
+			rdto.setId(rs.getString("id"));
+			rdto.setPw(rs.getString("pw"));
+			rdto.setName(rs.getString("name"));
+			rdto.setPhone1(rs.getString("phone1"));
+			rdto.setPhone2(rs.getString("phone2"));
+			rdto.setPhone3(rs.getString("phone3"));
+			rdto.setEmail(rs.getString("email"));
+			rdto.setZipcode(rs.getString("zipcode"));
+			rdto.setAddress1(rs.getString("address1"));
+			rdto.setAddress2(rs.getString("address2"));
+			rdto.setIsBlocked(rs.getString("isblocked"));
+		}
+		rs.close();
+		pstat.close();
+		con.close();
+
+		return rdto;
+	}
+
 }

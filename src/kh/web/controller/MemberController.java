@@ -21,23 +21,12 @@ public class MemberController extends HttpServlet {
 			throws ServletException, IOException {
 
 		try {
-
-			
 			String requestURI = request.getRequestURI();
 			String contextPath = request.getContextPath();
 			String command = requestURI.substring(contextPath.length());
 
-			DAO dao = new DAO();
-			MypageDAO myPagedao = new MypageDAO();
-			MemberDAO memberDAO = new MemberDAO();
-
 			MemberDAO mdao = new MemberDAO();
-
-            MypageDAO myPagedao= new MypageDAO();
-            MemberDAO memberDAO = new MemberDAO();
-
             RegisterDTO rDTO = new RegisterDTO();
-			
             
 			String dst = null;
 			boolean isRedirect = true;
@@ -47,7 +36,9 @@ public class MemberController extends HttpServlet {
 				String id = request.getParameter("id");
 				String pw = request.getParameter("pw");
 
-				boolean result = memberDAO.isLoginAvailable(id, pw);
+				System.out.println("id"+id);
+				System.out.println("pw"+pw);
+				boolean result = mdao.isLoginAvailable(id, pw);
 
 				if (result) {
 					request.getSession().setAttribute("loginId", id);
@@ -63,8 +54,8 @@ public class MemberController extends HttpServlet {
 				String id = (String) request.getSession().getAttribute("loginId");
 				request.setAttribute("id", id);
 
-				List<RegisterDTO> result;
-				result = myPagedao.myPage(id);
+				RegisterDTO result = new RegisterDTO();
+				result = mdao.myPage(id);
 
 				request.setAttribute("result", result);
 				isRedirect = false;
@@ -105,7 +96,7 @@ public class MemberController extends HttpServlet {
 
 				isRedirect = false;
 					
-				boolean result = memberDAO.signUp(rDTO);
+				boolean result = mdao.signUp(rDTO);
 				
 				request.setAttribute("signupResult", result);
 
@@ -121,7 +112,7 @@ public class MemberController extends HttpServlet {
 			} else if (command.equals("/memberOut.do")) {
 				String id = (String)request.getSession().getAttribute("loginId");
 				String pw = request.getParameter("pw");
-				int result = memberDAO.memberOutData(id, pw);
+				int result = mdao.memberOutData(id, pw);
 				request.setAttribute("result", result);
 				isRedirect = false;
 				dst = "memberOutView.jsp";
