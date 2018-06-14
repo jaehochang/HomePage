@@ -56,7 +56,7 @@ public class FrontController extends HttpServlet {
 					request.setAttribute("navisearch", navisearch);
 				}
 				isRedirect = false;
-				dst = "boardList.jsp";
+				dst = "boardView.jsp";
 
 			} else if (command.equals("")) {
 
