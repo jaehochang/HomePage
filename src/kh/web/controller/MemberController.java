@@ -43,9 +43,13 @@ public class MemberController extends HttpServlet {
 				
 				boolean result = memberDAO.isLoginAvailable(id, pw);
 				
+				if(result) {
+					request.getSession().setAttribute("loginId", id);
+				}
+				
 				request.setAttribute("result", result);
 				isRedirect = false;
-				dst = "loginView.jsp";
+				dst = "main.jsp";
 
 			} else if (command.equals("/mypage.do")) {
 				String id = (String) request.getSession().getAttribute("userID");
@@ -58,6 +62,7 @@ public class MemberController extends HttpServlet {
 				request.setAttribute("result", result);
 				isRedirect = false;
 				dst = "mypage.jsp";
+				
 			} else if (command.equals("/modify.do")) {
 
 			}
