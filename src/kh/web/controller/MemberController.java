@@ -44,7 +44,7 @@ public class MemberController extends HttpServlet {
 				boolean result = memberDAO.isLoginAvailable(id, pw);
 				
 				if(result) {
-					
+					request.getSession().setAttribute("loginId", id);
 				}
 				
 				request.setAttribute("result", result);
@@ -52,7 +52,7 @@ public class MemberController extends HttpServlet {
 				dst = "main.jsp";
 
 			} else if (command.equals("/mypage.do")) {
-				String id = (String) request.getSession().getAttribute("userID");
+				String id = (String) request.getSession().getAttribute("loginId");
 				
 				request.setAttribute("id", id);
 				
@@ -62,6 +62,7 @@ public class MemberController extends HttpServlet {
 				request.setAttribute("result", result);
 				isRedirect = false;
 				dst = "mypage.jsp";
+				
 			} else if (command.equals("/modify.do")) {
 
 			}
@@ -72,10 +73,10 @@ public class MemberController extends HttpServlet {
 				dst="memberOut.jsp";
 
 			} else if (command.equals("/memberOut.do")) {
-				String id = (String)request.getSession().getAttribute("id");
+				String id = (String)request.getSession().getAttribute("loginId");
 				/*String id = request.getParameter("id");*/
 				String pw = request.getParameter("pw");
-				int result = dao.memberOutData(id, pw);
+				int result = memberDAO.memberOutData(id, pw);
 				request.setAttribute("result", result);
 				isRedirect=false;
 				dst="memberOutView.jsp";
