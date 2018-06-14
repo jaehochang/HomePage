@@ -29,6 +29,8 @@ public class MemberController extends HttpServlet {
 			DAO dao = new DAO();
             MypageDAO myPagedao= new MypageDAO();
             MemberDAO memberDAO = new MemberDAO();
+
+            RegisterDTO rDTO = new RegisterDTO();
 			
             
 			String dst = null;
@@ -63,7 +65,19 @@ public class MemberController extends HttpServlet {
 				
 			} else if (command.equals("/modify.do")) {
 
-			}else if (command.equals("/toMemberOut.do")) {
+			} else if (command.equals("/signup.do")) {
+
+				isRedirect = false;
+					
+				boolean result = memberDAO.signUp(rDTO);
+				
+				request.setAttribute("signupResult", result);
+
+				dst="signup.jsp";
+				
+			}
+			
+			else if (command.equals("/toMemberOut.do")) {
 				
 				isRedirect=false;
 				dst="memberOut.jsp";
