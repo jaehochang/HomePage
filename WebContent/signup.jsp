@@ -49,14 +49,18 @@
 
 
 window.onload = function(){
+	
+	var alarm = "회원 가입에 성공하였습니다. 로그인 페이지로 이동합니다.";
+	alert(alarm);
+
+	
 	setInterval(function(){
-
-		var alarm = "회원 가입에 성공하였습니다. 로그인 페이지로 이동합니다.";
-
-		alert(alarm);
 		location.href = "login.jsp";
 	},3000);
+
+
 }
+
 </script>
 
 
@@ -145,7 +149,7 @@ window.onload = function(){
 								placeholder="검색">
 							<div class="input-group-btn">
 
-								<button class="btn btn-default" type="submit">
+								<button class="btn btn-default" type="button" >
 									<i class="glyphicon glyphicon-search"></i>
 								</button>
 							</div>
@@ -178,8 +182,10 @@ window.onload = function(){
 			document.getElementById("return").onclick = function() {
 				location.href = "login.jsp";
 			}
-		}
+		}		
 	</script>
+
+
 
 	</c:if>
 

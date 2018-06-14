@@ -68,6 +68,7 @@ public class MemberController extends HttpServlet {
 			} else if (command.equals("/modify.do")) {
 
 			} else if (command.equals("/signup.do")) {
+
 				isRedirect = false;
 					
 				boolean result = memberDAO.signUp(rDTO);
