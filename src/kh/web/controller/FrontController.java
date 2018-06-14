@@ -28,9 +28,10 @@ public class FrontController extends HttpServlet {
 			boolean isRedirect = true;
 
 			if (command.equals("")) {
-
+				
+			
 			} else if (command.equals("")) {
-
+			
 			}
 
 			if (isRedirect) {

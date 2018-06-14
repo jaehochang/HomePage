@@ -66,6 +66,21 @@ public class MemberController extends HttpServlet {
 			} else if (command.equals("/modify.do")) {
 
 			}
+			
+			else if (command.equals("/toMemberOut.do")) {
+				
+				isRedirect=false;
+				dst="memberOut.jsp";
+
+			} else if (command.equals("/memberOut.do")) {
+				String id = (String)request.getSession().getAttribute("id");
+				/*String id = request.getParameter("id");*/
+				String pw = request.getParameter("pw");
+				int result = dao.memberOutData(id, pw);
+				request.setAttribute("result", result);
+				isRedirect=false;
+				dst="memberOutView.jsp";
+			}
 
 			if (isRedirect) {
 				response.sendRedirect(dst);
