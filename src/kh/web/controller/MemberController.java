@@ -12,10 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import kh.web.dao.DAO;
 import kh.web.dao.MemberDAO;
-<<<<<<< Updated upstream
 import kh.web.dao.MypageDAO;
-=======
->>>>>>> Stashed changes
 import kh.web.dto.RegisterDTO;
 
 @WebServlet("*.do")
@@ -33,13 +30,10 @@ public class MemberController extends HttpServlet {
 			String command = requestURI.substring(contextPath.length());
 
 			DAO dao = new DAO();
-<<<<<<< Updated upstream
             MypageDAO myPagedao= new MypageDAO();
             MemberDAO memberDAO = new MemberDAO();
-=======
-			MemberDAO mDAO = new MemberDAO();
-			RegisterDTO rDTO = new RegisterDTO();
->>>>>>> Stashed changes
+
+            RegisterDTO rDTO = new RegisterDTO();
 			
 			String dst = null;
 			boolean isRedirect = true;
@@ -76,7 +70,7 @@ public class MemberController extends HttpServlet {
 			} else if (command.equals("/signup.do")) {
 				isRedirect = false;
 					
-				boolean result = mDAO.signUp(rDTO);
+				boolean result = memberDAO.signUp(rDTO);
 				
 				request.setAttribute("signupResult", result);
 
