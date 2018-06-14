@@ -22,7 +22,7 @@ public class MypageDAO {
 		List<RegisterDTO> result= new ArrayList<RegisterDTO>();
 		
 		while(rs.next()) {
-			result.add(new RegisterDTO(rs.getString("id"),rs.getString("pw"),rs.getString("name"),rs.getString("phone1"),rs.getString("phone2"),rs.getString("phone3"),rs.getString("email"),rs.getString("zipcode"),rs.getString("address1"),rs.getString("address2"),rs.getString("isBlocked")));
+			result.add(new RegisterDTO(rs.getString("id"),rs.getString("pw"),rs.getString("name"),rs.getString("phone1"),rs.getString("phone2"),rs.getString("phone3"),rs.getString("email"),rs.getString("zipcode"),rs.getString("address1"),rs.getString("address2"),rs.getString("isblocked")));
 			
 		}
 		con.close();
