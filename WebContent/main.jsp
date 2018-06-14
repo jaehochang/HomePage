@@ -31,6 +31,9 @@
 			
 		});
 	
+		$("#drop").click(function(){
+			$(location).attr('href','toMemberOut.do');
+		})
 	</script>
 	
 	
