@@ -45,11 +45,13 @@ public class MemberController extends HttpServlet {
 				
 				if(result) {
 					request.getSession().setAttribute("loginId", id);
+					dst = "main.jsp";
+				}else {
+					dst = "login.jsp";
 				}
 				
 				request.setAttribute("result", result);
 				isRedirect = false;
-				dst = "main.jsp";
 
 			} else if (command.equals("/mypage.do")) {
 				String id = (String) request.getSession().getAttribute("loginId");
