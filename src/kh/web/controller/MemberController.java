@@ -52,7 +52,7 @@ public class MemberController extends HttpServlet {
 				dst = "main.jsp";
 
 			} else if (command.equals("/mypage.do")) {
-				String id = (String) request.getSession().getAttribute("userID");
+				String id = (String) request.getSession().getAttribute("loginId");
 				
 				request.setAttribute("id", id);
 				
