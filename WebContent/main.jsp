@@ -26,7 +26,7 @@
 	<script>
 		$("#board").click(function(){
 			
-			$("location").attr('href',"boradView.jsp");
+			$(location).attr('href','boardView.jsp');
 			
 		});
 	
