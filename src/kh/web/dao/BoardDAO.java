@@ -264,20 +264,20 @@ public class BoardDAO {
 		StringBuilder sb = new StringBuilder(); //문자열 만들어서 쌓아 올린다.
 		
 		if(needPrev) {
-			sb.append("<a href='BoardController.co?currentPage="+(startNavi-1)+"'>< </a>");
+			sb.append("<a href='BoardController.bo?currentPage="+(startNavi-1)+"'>< </a>");
 		}
 		
 		for(int i=startNavi; i<= endNavi; i++) {
 			if(currentPage == i) {
-				sb.append("<a id='naviBt'href='BoardController.co?currentPage="+ i +"'> <b> " + i + "</b></a>"); 
+				sb.append("<a id='naviBt'href='BoardController.bo?currentPage="+ i +"'> <b> " + i + "</b></a>"); 
 				//스트링빌더에 차곡차곡 쌓고있는것, 현재페이지를 두각시키위해 b태그 추가
 			}else {
-				sb.append("<a id='naviBt'href='BoardController.co?currentPage="+ i +"'> " + i + "</a>"); //스트링빌더에 차곡차곡 쌓고있는것
+				sb.append("<a id='naviBt'href='BoardController.bo?currentPage="+ i +"'> " + i + "</a>"); //스트링빌더에 차곡차곡 쌓고있는것
 			}
 			
 		}
 		if(needNext) {
-			sb.append("<a href='BoardController.co?currentPage="+(endNavi+1)+"'>></a>");
+			sb.append("<a href='BoardController.bo?currentPage="+(endNavi+1)+"'>></a>");
 		}
 		System.out.println(sb.toString()); // 쌓았던것을 한번에 출력
 		
