@@ -30,7 +30,6 @@ public class MemberController extends HttpServlet {
 			MypageDAO myPagedao = new MypageDAO();
 			MemberDAO memberDAO = new MemberDAO();
 
-			MypageDAO myPagedao = new MypageDAO();
 			MemberDAO mdao = new MemberDAO();
 
 			String dst = null;
