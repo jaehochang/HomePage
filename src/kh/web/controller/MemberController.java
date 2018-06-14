@@ -22,6 +22,7 @@ public class MemberController extends HttpServlet {
 
 		try {
 
+			
 			String requestURI = request.getRequestURI();
 			String contextPath = request.getContextPath();
 			String command = requestURI.substring(contextPath.length());
@@ -32,6 +33,12 @@ public class MemberController extends HttpServlet {
 
 			MemberDAO mdao = new MemberDAO();
 
+            MypageDAO myPagedao= new MypageDAO();
+            MemberDAO memberDAO = new MemberDAO();
+
+            RegisterDTO rDTO = new RegisterDTO();
+			
+            
 			String dst = null;
 			boolean isRedirect = true;
 
@@ -44,11 +51,13 @@ public class MemberController extends HttpServlet {
 
 				if (result) {
 					request.getSession().setAttribute("loginId", id);
+					dst = "main.jsp";
+				}else {
+					dst = "login.jsp";
 				}
 
 				request.setAttribute("result", result);
 				isRedirect = false;
-				dst = "main.jsp";
 
 			} else if (command.equals("/mypage.do")) {
 				String id = (String) request.getSession().getAttribute("loginId");
@@ -92,6 +101,16 @@ public class MemberController extends HttpServlet {
 					throw new Exception();
 				}
 
+			} else if (command.equals("/signup.do")) {
+
+				isRedirect = false;
+					
+				boolean result = memberDAO.signUp(rDTO);
+				
+				request.setAttribute("signupResult", result);
+
+				dst="signup.jsp";
+				
 			}
 
 			else if (command.equals("/toMemberOut.do")) {
@@ -102,7 +121,7 @@ public class MemberController extends HttpServlet {
 			} else if (command.equals("/memberOut.do")) {
 				String id = (String)request.getSession().getAttribute("loginId");
 				String pw = request.getParameter("pw");
-				int result = dao.memberOutData(id, pw);
+				int result = memberDAO.memberOutData(id, pw);
 				request.setAttribute("result", result);
 				isRedirect = false;
 				dst = "memberOutView.jsp";
