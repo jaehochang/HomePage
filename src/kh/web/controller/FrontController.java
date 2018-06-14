@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import kh.web.dao.DAO;
 
-@WebServlet("*.do")
+@WebServlet("*.bo")
 public class FrontController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -28,9 +28,10 @@ public class FrontController extends HttpServlet {
 			boolean isRedirect = true;
 
 			if (command.equals("")) {
-
+				
+			
 			} else if (command.equals("")) {
-
+			
 			}
 
 			if (isRedirect) {
