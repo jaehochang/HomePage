@@ -21,9 +21,6 @@ public class MemberController extends HttpServlet {
 			throws ServletException, IOException {
 
 		try {
-
-			
-			
 			
 			String requestURI = request.getRequestURI();
 			String contextPath = request.getContextPath();
@@ -35,6 +32,7 @@ public class MemberController extends HttpServlet {
 
             RegisterDTO rDTO = new RegisterDTO();
 			
+            
 			String dst = null;
 			boolean isRedirect = true;
 
@@ -88,7 +86,7 @@ public class MemberController extends HttpServlet {
 				String id = (String)request.getSession().getAttribute("loginId");
 				/*String id = request.getParameter("id");*/
 				String pw = request.getParameter("pw");
-				int result = dao.memberOutData(id, pw);
+				int result = memberDAO.memberOutData(id, pw);
 				request.setAttribute("result", result);
 				isRedirect=false;
 				dst="memberOutView.jsp";
