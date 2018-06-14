@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kh.web.dao.DAO;
+import kh.web.dao.MemberDAO;
 import kh.web.dao.MypageDAO;
 import kh.web.dto.RegisterDTO;
 
@@ -30,11 +31,21 @@ public class MemberController extends HttpServlet {
 
 			DAO dao = new DAO();
             MypageDAO myPagedao= new MypageDAO();
+            MemberDAO memberDAO = new MemberDAO();
 			
 			String dst = null;
 			boolean isRedirect = true;
 
 			if (command.equals("/login.do")) {
+				
+				String id = request.getParameter("id");
+				String pw = request.getParameter("pw");
+				
+				boolean result = memberDAO.isLoginAvailable(id, pw);
+				
+				request.setAttribute("result", result);
+				isRedirect = false;
+				dst = "loginView.jsp";
 
 			} else if (command.equals("/mypage.do")) {
 				String id = (String) request.getSession().getAttribute("userID");

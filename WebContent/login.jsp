@@ -8,8 +8,8 @@
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script>
 	$(document).ready(function(){
-		$("#Signup").click(function(){
-			
+		$("#signup").click(function(){
+			$(location).attr("", url);
 		});
 	})
 </script>
@@ -30,7 +30,7 @@
 		</tr>
 		<tr>
 			<td colspan="2"><input type=submit value="로그인">
-			<button id="Signup" type=button>회원가입</button></td>
+			<button id="signup" type=button>회원가입</button></td>
 		</tr>
 	</table>
 	</form>
