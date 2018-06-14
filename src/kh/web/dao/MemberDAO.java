@@ -59,11 +59,4 @@ public class MemberDAO {
 		return result;
 
 	}
-<<<<<<< Updated upstream
-	
-	
-	
-=======
-
->>>>>>> Stashed changes
 }
