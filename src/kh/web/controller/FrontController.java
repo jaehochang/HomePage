@@ -59,7 +59,7 @@ public class FrontController extends HttpServlet {
 				dst = "boardView.jsp";
 
 			} else if (command.equals("")) {
-
+			
 			}
 
 			if (isRedirect) {
