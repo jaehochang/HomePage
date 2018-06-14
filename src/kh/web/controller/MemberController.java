@@ -76,7 +76,7 @@ public class MemberController extends HttpServlet {
 				String id = (String)request.getSession().getAttribute("loginId");
 				/*String id = request.getParameter("id");*/
 				String pw = request.getParameter("pw");
-				int result = dao.memberOutData(id, pw);
+				int result = memberDAO.memberOutData(id, pw);
 				request.setAttribute("result", result);
 				isRedirect=false;
 				dst="memberOutView.jsp";
