@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>오류</title>
+</head>
+<body>
+	잘못된 접근이쥬?
+	<br> 3초 후 자동으로 페이지가 이동하쥬?
+	<script>
+		// 3초후에 한번만!!! 이 함수를 실행하겠다.
+		// setInterval은 반복적으로 실행
+		setTimeout(function() {
+			location.href = "main.jsp";
+		}, 3000);
+	</script>
+</body>
+</html>
