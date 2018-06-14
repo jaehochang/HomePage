@@ -21,9 +21,6 @@ public class MemberController extends HttpServlet {
 			throws ServletException, IOException {
 
 		try {
-
-			
-			
 			
 			String requestURI = request.getRequestURI();
 			String contextPath = request.getContextPath();
@@ -33,6 +30,7 @@ public class MemberController extends HttpServlet {
             MypageDAO myPagedao= new MypageDAO();
             MemberDAO memberDAO = new MemberDAO();
 			
+            
 			String dst = null;
 			boolean isRedirect = true;
 
@@ -65,9 +63,7 @@ public class MemberController extends HttpServlet {
 				
 			} else if (command.equals("/modify.do")) {
 
-			}
-			
-			else if (command.equals("/toMemberOut.do")) {
+			}else if (command.equals("/toMemberOut.do")) {
 				
 				isRedirect=false;
 				dst="memberOut.jsp";
