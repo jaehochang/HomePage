@@ -73,7 +73,7 @@ public class MemberController extends HttpServlet {
 				dst="memberOut.jsp";
 
 			} else if (command.equals("/memberOut.do")) {
-				String id = (String)request.getSession().getAttribute("id");
+				String id = (String)request.getSession().getAttribute("loginId");
 				/*String id = request.getParameter("id");*/
 				String pw = request.getParameter("pw");
 				int result = dao.memberOutData(id, pw);
