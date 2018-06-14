@@ -21,9 +21,6 @@ public class MemberController extends HttpServlet {
 
 		try {
 
-			
-			
-			
 			String requestURI = request.getRequestURI();
 			String contextPath = request.getContextPath();
 			String command = requestURI.substring(contextPath.length());
@@ -37,7 +34,7 @@ public class MemberController extends HttpServlet {
 			if (command.equals("/login.do")) {
 
 			} else if (command.equals("/mypage.do")) {
-				String id = (String) request.getSession().getAttribute("userID");
+				String id = (String) request.getSession().getAttribute("id");
 				
 				request.setAttribute("id", id);
 				

@@ -27,10 +27,18 @@ public class FrontController extends HttpServlet {
 			String dst = null;
 			boolean isRedirect = true;
 
-			if (command.equals("")) {
+			if (command.equals("/toMemberOut.do")) {
+				
+				isRedirect=false;
+				dst="memberOut.jsp";
 
-			} else if (command.equals("")) {
-
+			} else if (command.equals("/memberOut.do")) {
+				String id = request.getParameter("id");
+				String pw = request.getParameter("pw");
+				int result = dao.memberOutData(id, pw);
+				request.setAttribute("result", result);
+				isRedirect=false;
+				dst="memberOutView.jsp";
 			}
 
 			if (isRedirect) {
