@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import kh.web.dao.DAO;
 
 @WebServlet("*.do")
-public class FrontController extends HttpServlet {
+public class MemberController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -27,9 +27,11 @@ public class FrontController extends HttpServlet {
 			String dst = null;
 			boolean isRedirect = true;
 
-			if (command.equals("")) {
+			if (command.equals("/login.do")) {
 
-			} else if (command.equals("")) {
+			} else if (command.equals("/mypage.do")) {
+
+			} else if (command.equals("/modify.do")) {
 
 			}
 
