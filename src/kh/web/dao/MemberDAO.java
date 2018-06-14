@@ -23,6 +23,7 @@ public class MemberDAO {
 		pstat.close();
 		con.close();
 
+
 		return result;
 	}
 
