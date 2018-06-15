@@ -42,6 +42,7 @@ public class MemberController extends HttpServlet {
 					dst = "main.jsp";
 				} else {
 					dst = "login.jsp";
+					System.out.println("로그인실패");
 				}
 
 				request.setAttribute("result", result);
@@ -58,17 +59,19 @@ public class MemberController extends HttpServlet {
 				request.setAttribute("result", result);
 				isRedirect = false;
 				dst = "mypage.jsp";
+				
 			} else if (command.equals("/modifyForm.do")) {
-				String id = (String) request.getSession().getAttribute("id");
-
+				String id = (String) request.getSession().getAttribute("loginId");
+				System.out.println("modifyForm.do: "+id);
+				
 				RegisterDTO rdto = new RegisterDTO();
 				rdto = mdao.getAlldata(id);
-
+				
 				request.setAttribute("rdto", rdto);
 				isRedirect = false;
 				dst = "memberModifyForm.jsp";
 			} else if (command.equals("/modify.do")) {
-				String id = (String) request.getSession().getAttribute("id");
+				String id = (String) request.getSession().getAttribute("loginId");
 
 				RegisterDTO rdto = new RegisterDTO();
 				rdto.setId(request.getParameter("id"));

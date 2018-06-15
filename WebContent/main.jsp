@@ -30,6 +30,10 @@
 			$(location).attr('href','BoardController.bo');
 			
 		});
+		
+		$("#modify").click(function(){
+			$(location).attr('href','modifyForm.do');
+		})
 	
 		$("#drop").click(function(){
 			$(location).attr('href','toMemberOut.do');
