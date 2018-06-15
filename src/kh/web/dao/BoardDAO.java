@@ -87,9 +87,7 @@ public class BoardDAO {
 			
 			
 			dto = new BoardDTO(rs.getString("writer"), rs.getString("title"), rs.getString("contents"),
-					rs.getString("writerdate"));
-			
-			
+			rs.getString("writerdate"));
 		}
 		
 		if(!(aceessId.equals(writerId))) {
