@@ -11,7 +11,7 @@ public class MemberDAO {
 	public boolean isLoginAvailable(String id, String pw) throws Exception {
 		Connection con = DBUtils.getConnection();
 
-		String sql = "select id,pw from members where id=? and pw=? and isblocked='N'";
+		String sql = "select id,pw from members where id=? and pw=?";
 		PreparedStatement pstat = con.prepareStatement(sql);
 		pstat.setString(1, id);
 		pstat.setString(2, pw);

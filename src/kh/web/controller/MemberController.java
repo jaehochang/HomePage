@@ -38,6 +38,7 @@ public class MemberController extends HttpServlet {
 
 				System.out.println("id"+id);
 				System.out.println("pw"+pw);
+				
 				boolean result = mdao.isLoginAvailable(id, pw);
 
 				if (result) {
