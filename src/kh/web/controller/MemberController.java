@@ -21,75 +21,102 @@ public class MemberController extends HttpServlet {
 			throws ServletException, IOException {
 
 		try {
-			
 			String requestURI = request.getRequestURI();
 			String contextPath = request.getContextPath();
 			String command = requestURI.substring(contextPath.length());
 
-			DAO dao = new DAO();
-            MypageDAO myPagedao= new MypageDAO();
-            MemberDAO memberDAO = new MemberDAO();
-
+			MemberDAO mdao = new MemberDAO();
             RegisterDTO rDTO = new RegisterDTO();
-			
             
 			String dst = null;
 			boolean isRedirect = true;
 
 			if (command.equals("/login.do")) {
-				
+
 				String id = request.getParameter("id");
 				String pw = request.getParameter("pw");
+
+				System.out.println("id"+id);
+				System.out.println("pw"+pw);
 				
-				boolean result = memberDAO.isLoginAvailable(id, pw);
-				
-				if(result) {
+				boolean result = mdao.isLoginAvailable(id, pw);
+
+				if (result) {
 					request.getSession().setAttribute("loginId", id);
+					dst = "main.jsp";
+				}else {
+					dst = "login.jsp";
 				}
-				
+
 				request.setAttribute("result", result);
 				isRedirect = false;
-				dst = "main.jsp";
 
 			} else if (command.equals("/mypage.do")) {
 				String id = (String) request.getSession().getAttribute("loginId");
-				
 				request.setAttribute("id", id);
-				
-				List<RegisterDTO> result;
-				result=myPagedao.myPage(id);
-				
+
+				RegisterDTO result = new RegisterDTO();
+				result = mdao.myPage(id);
+
 				request.setAttribute("result", result);
 				isRedirect = false;
 				dst = "mypage.jsp";
-				
+			} else if (command.equals("/modifyForm.do")) {
+				String id = (String) request.getSession().getAttribute("id");
+
+				RegisterDTO rdto = new RegisterDTO();
+				rdto = mdao.getAlldata(id);
+
+				request.setAttribute("rdto", rdto);
+				isRedirect = false;
+				dst = "memberModifyForm.jsp";
 			} else if (command.equals("/modify.do")) {
+				String id = (String) request.getSession().getAttribute("id");
+
+				RegisterDTO rdto = new RegisterDTO();
+				rdto.setId(request.getParameter("id"));
+				rdto.setPw(request.getParameter("pw"));
+				rdto.setName(request.getParameter("name"));
+				rdto.setPhone1(request.getParameter("phone1"));
+				rdto.setPhone2(request.getParameter("phone2"));
+				rdto.setPhone3(request.getParameter("phone3"));
+				rdto.setEmail(request.getParameter("email"));
+				rdto.setZipcode(request.getParameter("zipcode"));
+				rdto.setAddress1(request.getParameter("address1"));
+				rdto.setAddress2(request.getParameter("address2"));
+				int result = mdao.memberModify(rdto);
+
+				if (result > 0) {
+					isRedirect = false;
+					dst = "main.jsp";
+				} else {
+					throw new Exception();
+				}
 
 			} else if (command.equals("/signup.do")) {
 
 				isRedirect = false;
 					
-				boolean result = memberDAO.signUp(rDTO);
+				boolean result = mdao.signUp(rDTO);
 				
 				request.setAttribute("signupResult", result);
 
 				dst="signup.jsp";
 				
 			}
-			
+
 			else if (command.equals("/toMemberOut.do")) {
-				
-				isRedirect=false;
-				dst="memberOut.jsp";
+
+				isRedirect = false;
+				dst = "memberOut.jsp";
 
 			} else if (command.equals("/memberOut.do")) {
 				String id = (String)request.getSession().getAttribute("loginId");
-				/*String id = request.getParameter("id");*/
 				String pw = request.getParameter("pw");
-				int result = memberDAO.memberOutData(id, pw);
+				int result = mdao.memberOutData(id, pw);
 				request.setAttribute("result", result);
-				isRedirect=false;
-				dst="memberOutView.jsp";
+				isRedirect = false;
+				dst = "memberOutView.jsp";
 			}
 
 			if (isRedirect) {
