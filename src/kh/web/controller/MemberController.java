@@ -118,6 +118,9 @@ public class MemberController extends HttpServlet {
 				request.setAttribute("result", result);
 				isRedirect = false;
 				dst = "memberOutView.jsp";
+			}else if(command.equals("/logout.do")) {
+				request.getSession().invalidate();
+				dst="login.jsp";
 			}
 
 			if (isRedirect) {
