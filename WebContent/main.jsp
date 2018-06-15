@@ -5,24 +5,30 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Main</title>
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/custom.css">
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<title>Main</title>
+
 </head>
 <body>
 	
-
-	<table border="1" id="mainTb">
+<div class="container">
+		<div class="row">
+	<table class="table table-striped" style="border: 1px solid #dddddd" id="mainTb" align=center>	
 				<tr>
-					<td colspan=5 id="titleheader">${sessionScope.loginId}
+					<th colspan=5 id="titleheader"  style="text-align: center;">welcome ${sessionScope.loginId}!
 				</tr>
 				<tr>
-					<td><button id="logout" type="button">로그아웃</button>
-					<td><button id="mypage">나의페이지</button>
-					<td><button id="modify">정보수정</button>
-					<td><button id="drop">회원탈퇴</button>
-					<td><button id="board">게시판</button>
+					<td style="text-align: center;"><button class="btn btn-primary" id="logout" type="button">로그아웃</button>
+					<td style="text-align: center;"><button class="btn btn-default" id="mypage">나의페이지</button>
+					<td style="text-align: center;"><button class="btn btn-default" id="modify">정보수정</button>
+					<td style="text-align: center;"><button class="btn btn-default" id="drop">회원탈퇴</button>
+					<td style="text-align: center;"><button class="btn btn-success" id="board">게시판</button>
 				</tr>
 	</table>
+	</div>
+	</div>
 	
 	<script>
 		$("#board").click(function(){
