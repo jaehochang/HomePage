@@ -27,40 +27,39 @@
 	<div class="container">
 		<div class="row">
 			<table class="table table-striped" style="border: 1px solid #dddddd">
-				<c:forEach var="mypage" items="${result}">
-					<tbody>
-						<tr align=center>
-							<th colspan="3"
-								style="background-color: #eeeeee; text-align: center">MyPage
-
-							
-						</tr>
-
-						<tr>
-							<th>아이디
-							<td align=center>${mypage.id}
-						</tr>
-						<tr>
-							<th>이름
-							<td align=center>${mypage.name}
-						</tr>
-						<tr>
-							<th>핸드폰번호
-							<td align=center>${mypage.phone1}${mypage.phone2}${mypage.phone3}
-						</tr>
-						<tr>
-							<th>이메일
-							<td align=center>${mypage.email}
-						</tr>
-						<tr>
-							<th>주소
-							<td align=center>${mypage.address1}${mypage.address2}
-						</tr>
+				<tbody>
+					<tr align=center>
+						<th colspan="3"
+							style="background-color: #eeeeee; text-align: center">MyPage
 
 
-					</tbody>
+						
+					</tr>
 
-				</c:forEach>
+					<tr>
+						<th>아이디
+						<td align=center>${result.id}
+					</tr>
+					<tr>
+						<th>이름
+						<td align=center>${result.name}
+					</tr>
+					<tr>
+						<th>핸드폰번호
+						<td align=center>${result.phone1}${result.phone2}${result.phone3}
+					</tr>
+					<tr>
+						<th>이메일
+						<td align=center>${result.email}
+					</tr>
+					<tr>
+						<th>주소
+						<td align=center>${result.address1}${result.address2}
+					</tr>
+
+
+				</tbody>
+
 			</table>
 		</div>
 	</div>

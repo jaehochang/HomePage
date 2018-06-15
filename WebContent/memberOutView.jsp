@@ -10,7 +10,7 @@
 <script>
 		if (${result}>0) {
 			alert("회원탈퇴가 완료되었습니다");
-			/* location.href= "logout.do"; */
+			location.href= "logout.do";
 			close();
 		} else {
 			alert("회원탈퇴에 실패하셨습니다 \n\t PW를 확인해주세요");
