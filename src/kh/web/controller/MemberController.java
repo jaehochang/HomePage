@@ -70,6 +70,7 @@ public class MemberController extends HttpServlet {
 				request.setAttribute("rdto", rdto);
 				isRedirect = false;
 				dst = "memberModifyForm.jsp";
+				
 			} else if (command.equals("/modify.do")) {
 				String id = (String) request.getSession().getAttribute("loginId");
 

@@ -87,7 +87,7 @@ table tr td:last-child {
 			<table border="1">
 				<tr>
 					<td>아이디:</td>
-					<td><input type="text" name="id" value="${rrdto.getId()}"
+					<td><input type="text" name="id" value="${rdto.getId()}"
 						readonly></td>
 				</tr>
 				<tr>
@@ -129,7 +129,7 @@ table tr td:last-child {
 				<tr>
 					<td colspan="2" style="text-align: center;">
 						<button>수정하기</button>
-						<button type="button" onclick="location.href='login.do'">돌아가기</button>
+						<button type="button" onclick="location.href='main.jsp'">돌아가기</button>
 						<!-- 
 						history.back(); 전페이지
 						history.go(-2); 전전페이지
