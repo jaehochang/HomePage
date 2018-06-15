@@ -35,6 +35,10 @@
 			$(location).attr('href','toMemberOut.do');
 		})
 		
+		$("#logout").click(function(){
+			$(location).attr('href','logout.do');
+		})
+		
 		$("#mypage").click(function(){
 			$(location).attr('href','mypage.do');
 		})
