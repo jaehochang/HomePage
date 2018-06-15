@@ -9,7 +9,7 @@
 <script>
 	$(document).ready(function(){
 		$("#signup").click(function(){
-			$(location).attr("", url);
+			$(location).attr("href", "signup.jsp");
 		});
 	})
 </script>
@@ -29,7 +29,7 @@
 			<td><input type="password" name="pw"></td>
 		</tr>
 		<tr>
-			<td colspan="2"><input type=submit value="로그인">
+			<td colspan="2"><input type=submit value="로그인" >
 			<button id="signup" type=button>회원가입</button></td>
 		</tr>
 	</table>
