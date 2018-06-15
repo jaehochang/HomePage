@@ -1,7 +1,6 @@
 package kh.web.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,9 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kh.web.dao.DAO;
 import kh.web.dao.MemberDAO;
-import kh.web.dao.MypageDAO;
 import kh.web.dto.RegisterDTO;
 
 @WebServlet("*.do")
@@ -26,8 +23,8 @@ public class MemberController extends HttpServlet {
 			String command = requestURI.substring(contextPath.length());
 
 			MemberDAO mdao = new MemberDAO();
-            RegisterDTO rDTO = new RegisterDTO();
-            
+			RegisterDTO rDTO = new RegisterDTO();
+
 			String dst = null;
 			boolean isRedirect = true;
 
@@ -36,15 +33,16 @@ public class MemberController extends HttpServlet {
 				String id = request.getParameter("id");
 				String pw = request.getParameter("pw");
 
-				System.out.println("id"+id);
-				System.out.println("pw"+pw);
+				System.out.println("id" + id);
+				System.out.println("pw" + pw);
 				boolean result = mdao.isLoginAvailable(id, pw);
 
 				if (result) {
 					request.getSession().setAttribute("loginId", id);
 					dst = "main.jsp";
-				}else {
+				} else {
 					dst = "login.jsp";
+					System.out.println("로그인실패");
 				}
 
 				request.setAttribute("result", result);
@@ -55,22 +53,25 @@ public class MemberController extends HttpServlet {
 				request.setAttribute("id", id);
 
 				RegisterDTO result = new RegisterDTO();
+				rDTO.setId(id);
 				result = mdao.myPage(id);
 
 				request.setAttribute("result", result);
 				isRedirect = false;
 				dst = "mypage.jsp";
+				
 			} else if (command.equals("/modifyForm.do")) {
-				String id = (String) request.getSession().getAttribute("id");
-
+				String id = (String) request.getSession().getAttribute("loginId");
+				System.out.println("modifyForm.do: "+id);
+				
 				RegisterDTO rdto = new RegisterDTO();
 				rdto = mdao.getAlldata(id);
-
+				
 				request.setAttribute("rdto", rdto);
 				isRedirect = false;
 				dst = "memberModifyForm.jsp";
 			} else if (command.equals("/modify.do")) {
-				String id = (String) request.getSession().getAttribute("id");
+				String id = (String) request.getSession().getAttribute("loginId");
 
 				RegisterDTO rdto = new RegisterDTO();
 				rdto.setId(request.getParameter("id"));
@@ -95,13 +96,13 @@ public class MemberController extends HttpServlet {
 			} else if (command.equals("/signup.do")) {
 
 				isRedirect = false;
-					
+
 				boolean result = mdao.signUp(rDTO);
-				
+
 				request.setAttribute("signupResult", result);
 
-				dst="signup.jsp";
-				
+				dst = "signup.jsp";
+
 			}
 
 			else if (command.equals("/toMemberOut.do")) {
@@ -110,7 +111,7 @@ public class MemberController extends HttpServlet {
 				dst = "memberOut.jsp";
 
 			} else if (command.equals("/memberOut.do")) {
-				String id = (String)request.getSession().getAttribute("loginId");
+				String id = (String) request.getSession().getAttribute("loginId");
 				String pw = request.getParameter("pw");
 				int result = mdao.memberOutData(id, pw);
 				request.setAttribute("result", result);

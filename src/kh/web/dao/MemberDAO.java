@@ -11,7 +11,7 @@ public class MemberDAO {
 	public boolean isLoginAvailable(String id, String pw) throws Exception {
 		Connection con = DBUtils.getConnection();
 
-		String sql = "select id,pw from members where id=? and pw=? and isblocked='N'";
+		String sql = "select id,pw from members where id=? and pw=?";
 		PreparedStatement pstat = con.prepareStatement(sql);
 		pstat.setString(1, id);
 		pstat.setString(2, pw);
@@ -81,7 +81,7 @@ public class MemberDAO {
 			dto.setZipcode(rs.getString("zipcode"));
 			dto.setAddress1(rs.getString("address1"));
 			dto.setAddress2(rs.getString("address2"));
-			dto.setIsBlocked(rs.getString("block"));
+			dto.setIsBlocked(rs.getString("isblocked"));
 		}
 		rs.close();
 		pstat.close();
@@ -95,6 +95,7 @@ public class MemberDAO {
 
 		String sql = "update members set pw=?,name=?,phone1=?,phone2=?,phone3=?,email=?,zipcode=?,address1=?,address2=? where id=?";
 		PreparedStatement pstat = con.prepareStatement(sql);
+		
 		pstat.setString(1, dto.getPw());
 		pstat.setString(2, dto.getName());
 		pstat.setString(3, dto.getPhone1());
