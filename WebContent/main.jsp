@@ -34,6 +34,10 @@
 		$("#drop").click(function(){
 			$(location).attr('href','toMemberOut.do');
 		})
+		
+		$("#logout").click(function(){
+			$(location).attr('href','logout.do');
+		})
 	</script>
 	
 	
