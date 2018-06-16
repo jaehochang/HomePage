@@ -53,6 +53,7 @@ public class MemberDAO {
 			result = false;
 		}
 
+		
 		con.commit();
 		con.close();
 		pstat.close();

@@ -59,18 +59,18 @@ public class MemberController extends HttpServlet {
 				request.setAttribute("result", result);
 				isRedirect = false;
 				dst = "mypage.jsp";
-				
+
 			} else if (command.equals("/modifyForm.do")) {
 				String id = (String) request.getSession().getAttribute("loginId");
-				System.out.println("modifyForm.do: "+id);
-				
+				System.out.println("modifyForm.do: " + id);
+
 				RegisterDTO rdto = new RegisterDTO();
 				rdto = mdao.getAlldata(id);
-				
+
 				request.setAttribute("rdto", rdto);
 				isRedirect = false;
 				dst = "memberModifyForm.jsp";
-				
+
 			} else if (command.equals("/modify.do")) {
 				String id = (String) request.getSession().getAttribute("loginId");
 
@@ -96,14 +96,47 @@ public class MemberController extends HttpServlet {
 
 			} else if (command.equals("/signup.do")) {
 
+				request.setCharacterEncoding("utf8");
+				response.setCharacterEncoding("utf8");
+				
 				isRedirect = false;
+				RegisterDTO regDTO = new RegisterDTO();
+				
+				String id = request.getParameter("id");
+				String pw = request.getParameter("pw");
+				String name = request.getParameter("name");
+				String phone1 = request.getParameter("phone1");
+				String phone2 = request.getParameter("phone2");
+				String phone3 = request.getParameter("phone3");
+				String email = request.getParameter("email");
+				String zipcode = request.getParameter("zipcode");
+				String address1 = request.getParameter("address1");
+				String address2 = request.getParameter("address2");
+				
+				
+				regDTO.setId(id);
+				regDTO.setPw(pw);
+				regDTO.setName(name);
+				regDTO.setPhone1(phone1);
+				regDTO.setPhone2(phone2);
+				regDTO.setPhone3(phone3);
+				regDTO.setEmail(email);
+				regDTO.setZipcode(zipcode);
+				regDTO.setAddress1(address1);
+				regDTO.setAddress2(address2);
+				
+				
+				boolean result = mdao.signUp(regDTO);
 
-				boolean result = mdao.signUp(rDTO);
-
+				System.out.println("MemberController regDTO sysout :"+ regDTO.getId() + regDTO.getPw() + regDTO.getName() + regDTO.getPhone1() + regDTO.getPhone2() + regDTO.getPhone3() + regDTO.getZipcode() + regDTO.getAddress1() + regDTO.getAddress2() + regDTO.getIsBlocked());
+				
 				request.setAttribute("signupResult", result);
 
-				dst = "signup.jsp";
-
+				if (result) {
+					dst = "signup.jsp";
+				} else {
+					dst = "error.html";
+				}
 			}
 
 			else if (command.equals("/toMemberOut.do")) {
@@ -118,9 +151,9 @@ public class MemberController extends HttpServlet {
 				request.setAttribute("result", result);
 				isRedirect = false;
 				dst = "memberOutView.jsp";
-			}else if(command.equals("/logout.do")) {
+			} else if (command.equals("/logout.do")) {
 				request.getSession().invalidate();
-				dst="login.jsp";
+				dst = "login.jsp";
 			}
 
 			if (isRedirect) {
