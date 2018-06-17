@@ -94,14 +94,44 @@ public class MemberController extends HttpServlet {
 					throw new Exception();
 				}
 
-			} else if (command.equals("/signup.do")) {
+			} else if (command.equals("/idDupCheck.do")) {
+
+				String id = request.getParameter("id");
+
+				System.out.println("idDupCheck.do ID : " + id);
+				
+				boolean result = mdao.idDupCheckDAO(id);
+
+				System.out.println("id dup check " + result);
+
+
+				if(result) { // input ID 값이 이미 DB 아이디 존재
+
+					System.out.println("<" + id + " > 해당 아이디가 존재합니다.");
+					// 고로 신호를 뿌리지 않아 ajax에 error 발생시킴
+					
+				} else { // db에 해당 id가 없어 사용 가능
+
+
+					System.out.println(id + "해당 아이디가 존재하지 않아 사용가능 합니다.");
+					
+					isRedirect=false;
+					dst="signup.jsp";
+
+					response.getWriter().println(result); // ajax로 신호 뿌려 success 되게 하기
+						
+				}
+
+			}
+
+			else if (command.equals("/signup.do")) {
 
 				request.setCharacterEncoding("utf8");
 				response.setCharacterEncoding("utf8");
-				
+
 				isRedirect = false;
 				RegisterDTO regDTO = new RegisterDTO();
-				
+
 				String id = request.getParameter("id");
 				String pw = request.getParameter("pw");
 				String name = request.getParameter("name");
@@ -112,8 +142,7 @@ public class MemberController extends HttpServlet {
 				String zipcode = request.getParameter("zipcode");
 				String address1 = request.getParameter("address1");
 				String address2 = request.getParameter("address2");
-				
-				
+
 				regDTO.setId(id);
 				regDTO.setPw(pw);
 				regDTO.setName(name);
@@ -124,12 +153,13 @@ public class MemberController extends HttpServlet {
 				regDTO.setZipcode(zipcode);
 				regDTO.setAddress1(address1);
 				regDTO.setAddress2(address2);
-				
-				
+
 				boolean result = mdao.signUp(regDTO);
 
-				System.out.println("MemberController regDTO sysout :"+ regDTO.getId() + regDTO.getPw() + regDTO.getName() + regDTO.getPhone1() + regDTO.getPhone2() + regDTO.getPhone3() + regDTO.getZipcode() + regDTO.getAddress1() + regDTO.getAddress2() + regDTO.getIsBlocked());
-				
+				System.out.println("MemberController regDTO sysout :" + regDTO.getId() + regDTO.getPw()
+						+ regDTO.getName() + regDTO.getPhone1() + regDTO.getPhone2() + regDTO.getPhone3()
+						+ regDTO.getZipcode() + regDTO.getAddress1() + regDTO.getAddress2() + regDTO.getIsBlocked());
+
 				request.setAttribute("signupResult", result);
 
 				if (result) {

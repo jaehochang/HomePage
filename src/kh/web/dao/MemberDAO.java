@@ -23,7 +23,6 @@ public class MemberDAO {
 		pstat.close();
 		con.close();
 
-
 		return result;
 	}
 
@@ -53,7 +52,6 @@ public class MemberDAO {
 			result = false;
 		}
 
-		
 		con.commit();
 		con.close();
 		pstat.close();
@@ -96,7 +94,7 @@ public class MemberDAO {
 
 		String sql = "update members set pw=?,name=?,phone1=?,phone2=?,phone3=?,email=?,zipcode=?,address1=?,address2=? where id=?";
 		PreparedStatement pstat = con.prepareStatement(sql);
-		
+
 		pstat.setString(1, dto.getPw());
 		pstat.setString(2, dto.getName());
 		pstat.setString(3, dto.getPhone1());
@@ -129,7 +127,7 @@ public class MemberDAO {
 		return result;
 	}
 
-	public RegisterDTO myPage(String id) throws Exception{
+	public RegisterDTO myPage(String id) throws Exception {
 		Connection con = DBUtils.getConnection();
 
 		String sql = "select * from members where id=?";
@@ -156,6 +154,30 @@ public class MemberDAO {
 		con.close();
 
 		return rdto;
+	}
+
+	public boolean idDupCheckDAO(String id) throws Exception {
+		Connection con = DBUtils.getConnection();
+
+		String sql = "select * from members where id=?";
+		PreparedStatement pstat = con.prepareStatement(sql);
+		pstat.setString(1, id);
+		ResultSet rs = pstat.executeQuery();
+
+	
+		
+		boolean result = false;
+		if (rs.next()) {
+			System.out.println(rs.getString(1));
+			result = true;
+		} else {
+			result = false;
+		}
+			
+		con.close();
+		pstat.close();
+		
+		return result;
 	}
 
 }

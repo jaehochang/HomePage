@@ -173,7 +173,6 @@ body {
 
 				int randomNumOneOrTwo = (int) Math.floor(Math.random() * 2);
 				int randomNumZeroToNine = (int) Math.floor(Math.random() * 8 + 1);
-
 		%>
 		<script>
 			$(document).ready(function() {
@@ -237,12 +236,50 @@ body {
 								title="8 - 13자리의 영소문자 조합만 가능합니다(첫 자리 숫자 불가)" maxlength=13
 								size=30>
 
-							<button class="btn btn-default" type=button id=idDupleCheck>중복
+							<button class="btn btn-default" type=button id=idDupCheck>중복
 								확인</button>
-							<!-- DB 에서 아이디 중복 체크 : select * from members where id = ?  연결 해야함-->
 
 						</div>
 					</div>
+					<script>
+						$(document).ready(function() {
+							$("#idDupCheck").click(function() {
+
+								
+								var regex = /^[^0-9][a-zA-z0-9]{7,12}$/; 
+								
+								var id = $("#id").val();
+								
+								if ((id != null || id != "") && regex.test(id)) {
+
+									$.ajax({
+										url : "idDupCheck.do",
+										type : "post",
+										data : {
+											id : id
+										},
+										success : function(result) {
+											
+											alert("사용 가능");
+										},
+										error:function(){
+											alert("중복된 아이디");
+											$("#id").val("");
+
+										}
+									})
+
+								}else{
+									alert("8 - 13자리의 영소문자 조합만 가능합니다(첫 자리 숫자 불가)");
+									$("#id").val("");
+								}
+								
+							})
+
+						})
+					</script>
+
+
 
 					<div class="form-group">
 						<label for="password">비밀번호</label><input type="password"
@@ -255,9 +292,10 @@ body {
 						<label for="password-check">비밀번호 재확인</label> <input
 							type="password" class="form-control" size=30 minlength=8
 							maxlength=10 name=password-check title="최소 8 - 10자 입력"
-							id=password-check required placeholder="비밀번호 재입력"> <span
-							id=errorPwDup style="margin: 10px; color: red;"></span>
+							id=password-check required placeholder="비밀번호 재입력"> 
 					</div>
+					<span
+							id=errorPwDup style="color: red;"></span>
 
 
 					<script>
@@ -317,10 +355,10 @@ body {
 								<option>064</option>
 
 							</select> <input type="text" name=phone2 id=phone2 class=form-control
-								required placeholder="3-4자리 숫자" pattern="^[0-9]{3,4}"
+								required placeholder="숫자 3-4자리" pattern="^[0-9]{3,4}"
 								title="최소 3자리 숫자를 입력하셔야 합니다." maxlength=4> <input
 								type="text" name=phone3 id=phone3 class=form-control required
-								placeholder="연락처 마지막 4자리" maxlength=4 pattern="^[0-9]{4}"
+								placeholder="숫자 4자리" maxlength=4 pattern="^[0-9]{4}"
 								title="최소 4자리 숫자를 입력하셔야 합니다."> <span id=phoneAlert></span>
 
 
@@ -382,7 +420,7 @@ body {
 
 
 					<div class="form-group">
-						<label for="email">이메일</label> <input type="email" name=email
+						<label for="email">이메일</label> <input type="email" name=email placeholder="이메일 주소 형식 작성"
 							id=email class=form-control size=40 maxlength=40 required>
 					</div>
 
