@@ -174,9 +174,6 @@ body {
 				int randomNumOneOrTwo = (int) Math.floor(Math.random() * 2);
 				int randomNumZeroToNine = (int) Math.floor(Math.random() * 8 + 1);
 
-				for (int i = 0; i < 100; i++) {
-					System.out.println("Ryan Num : " + randomNumOneOrTwo + randomNumZeroToNine);
-				}
 		%>
 		<script>
 			$(document).ready(function() {
